@@ -57,6 +57,27 @@
     .btn-gold { background:var(--gold); color:#4a126e; }
     .btn-outline { color:white; border-color:white; }
     .btn:hover { transform:translateY(-2px); filter:brightness(1.05); }
+    .feedback-dialog { width:min(92vw,520px); margin:auto; border:0; border-radius:22px; padding:30px; color:var(--text); box-shadow:0 20px 60px rgba(22,0,38,.35); }
+    .feedback-dialog[open] { max-height:90vh; overflow:auto; }
+    .feedback-dialog::backdrop { background:rgba(25,4,42,.65); backdrop-filter:blur(4px); }
+    .feedback-dialog h2 { color:var(--purple-dark); margin-bottom:8px; }
+    .feedback-dialog p { color:#70577c; margin-bottom:18px; }
+    .feedback-close { float:right; border:0; background:transparent; color:var(--purple-dark); font-size:1.7rem; cursor:pointer; line-height:1; }
+    .feedback-form label { display:block; margin:12px 0 6px; font-weight:700; }
+    .feedback-form textarea { width:100%; min-height:130px; padding:12px; border:1px solid #d9c5e6; border-radius:12px; font:inherit; resize:vertical; }
+    .feedback-form button { margin-top:14px; border:0; cursor:pointer; }
+    .profile-tabs { display:flex; gap:10px; margin:14px 0; }
+    .profile-tabs button { flex:1; padding:10px; border:1px solid #d9c5e6; border-radius:999px; background:white; color:var(--purple-dark); font-weight:700; cursor:pointer; }
+    .profile-tabs button[aria-selected="true"] { background:var(--purple-dark); color:white; }
+    .profile-form label { display:block; margin:12px 0 6px; font-weight:700; }
+    .profile-form input { width:100%; padding:12px; border:1px solid #d9c5e6; border-radius:12px; font:inherit; }
+    .profile-form button, .profile-home button { margin-top:14px; border:0; cursor:pointer; }
+    .profile-home .btn-outline { color:var(--purple-dark); border-color:var(--purple-dark); }
+    .profile-status { min-height:1.5em; margin:12px 0 0 !important; color:var(--purple-dark) !important; }
+    .profile-note { font-size:.83rem; }
+    .feedback-list { list-style:none; display:grid; gap:10px; margin:14px 0; }
+    .feedback-list li { padding:12px; border-radius:12px; background:#f8efff; overflow-wrap:anywhere; }
+    .feedback-list time { display:block; margin-top:6px; color:#70577c; font-size:.78rem; }
     section { padding:75px 22px; }
     .container { max-width:1100px; margin:auto; }
     .section-title { text-align:center; margin-bottom:40px; }
@@ -281,6 +302,7 @@
       <li><a href="#produtos">Produtos</a></li>
       <li><a href="#novidades">Novidades</a></li>
       <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#perfil" onclick="document.getElementById('feedback-dialog').showModal(); return false;">Meu perfil</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
@@ -381,11 +403,53 @@
       <div class="buttons">
         <a class="btn btn-gold" href="https://wa.me/5541991239210" target="_blank" rel="noopener">WhatsApp</a>
        <a class="btn btn-outline" href="https://www.instagram.com/caldartt._beauty/" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn btn-outline" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Gostaria%20de%20enviar%20uma%20sugest%C3%A3o%20ou%20coment%C3%A1rio%20sobre%20o%20site." target="_blank" rel="noopener">Sugestões e comentários</a>
+        <button class="btn btn-outline" type="button" onclick="document.getElementById('feedback-dialog').showModal()">Sugestões e comentários</button>
       </div>
     </div>
   </section>
 </main>
+
+<dialog class="feedback-dialog" id="feedback-dialog" aria-labelledby="feedback-title">
+  <button class="feedback-close" type="button" aria-label="Fechar" onclick="document.getElementById('feedback-dialog').close()">×</button>
+  <h2 id="feedback-title">Meu perfil</h2>
+  <p>Seu e-mail é usado para acessar a conta. As mensagens ficam salvas de forma privada para você e para a equipe da loja; não são publicadas nem enviadas por e-mail. Evite incluir dados pessoais nas mensagens.</p>
+  <div id="profile-auth">
+    <div class="profile-tabs" role="tablist" aria-label="Acesso ao perfil">
+      <button id="login-tab" type="button" role="tab" aria-selected="true">Entrar</button>
+      <button id="signup-tab" type="button" role="tab" aria-selected="false">Criar perfil</button>
+    </div>
+    <form class="profile-form" id="login-form">
+      <label for="login-email">E-mail da conta</label>
+      <input id="login-email" name="email" type="email" autocomplete="email" required>
+      <label for="login-password">Senha</label>
+      <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+      <button class="btn btn-gold" type="submit">Entrar</button>
+    </form>
+    <form class="profile-form" id="signup-form" hidden>
+      <label for="signup-nickname">Apelido do perfil</label>
+      <input id="signup-nickname" name="nickname" minlength="3" maxlength="24" pattern="[A-Za-z0-9_.-]+" autocomplete="nickname" required>
+      <label for="signup-email">E-mail da conta</label>
+      <input id="signup-email" name="email" type="email" autocomplete="email" required>
+      <label for="signup-password">Senha (mínimo de 8 caracteres)</label>
+      <input id="signup-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+      <p class="profile-note">Use apenas um apelido. Não coloque telefone, endereço ou nome completo no perfil.</p>
+      <button class="btn btn-gold" type="submit">Criar conta</button>
+    </form>
+  </div>
+  <div class="profile-home" id="profile-home" hidden>
+    <p>Olá, <strong id="profile-nickname"></strong>!</p>
+    <h3>Sugestões e comentários</h3>
+    <form class="feedback-form" id="feedback-form">
+      <label for="feedback-message">Sua mensagem</label>
+      <textarea id="feedback-message" name="message" minlength="5" maxlength="1000" required placeholder="Escreva sua sugestão ou comentário..."></textarea>
+      <button class="btn btn-gold" type="submit">Salvar no meu perfil</button>
+    </form>
+    <h3>Minhas mensagens</h3>
+    <ul class="feedback-list" id="feedback-list"></ul>
+    <button class="btn btn-outline" id="logout-button" type="button">Sair da conta</button>
+  </div>
+  <p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>
+</dialog>
 
 <footer>
   <strong>Caldartt Beauty</strong>
@@ -409,6 +473,147 @@ document.querySelectorAll("#menu a").forEach(link => {
     button.setAttribute("aria-expanded", "false");
   });
 });
+
+document.getElementById("feedback-dialog").addEventListener("click", event => {
+  if (event.target === event.currentTarget) event.currentTarget.close();
+});
+</script>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/+esm";
+
+const supabase = createClient(
+  "https://isgazugbbygocmwljyzc.supabase.co",
+  "sb_publishable_NxIXll-y0QHSZ2DYZvaE9A_FdK4MFHY"
+);
+const authArea = document.getElementById("profile-auth");
+const profileArea = document.getElementById("profile-home");
+const statusText = document.getElementById("profile-status");
+const dialog = document.getElementById("feedback-dialog");
+
+function setStatus(message) { statusText.textContent = message; }
+function showAuth() { authArea.hidden = false; profileArea.hidden = true; }
+
+function setAuthTab(tab) {
+  const showSignup = tab === "signup";
+  document.getElementById("login-form").hidden = showSignup;
+  document.getElementById("signup-form").hidden = !showSignup;
+  document.getElementById("login-tab").setAttribute("aria-selected", String(!showSignup));
+  document.getElementById("signup-tab").setAttribute("aria-selected", String(showSignup));
+  setStatus("");
+}
+
+document.getElementById("login-tab").addEventListener("click", () => setAuthTab("login"));
+document.getElementById("signup-tab").addEventListener("click", () => setAuthTab("signup"));
+
+async function loadProfile(user) {
+  authArea.hidden = true;
+  profileArea.hidden = false;
+  document.getElementById("profile-nickname").textContent = "...";
+  setStatus("Carregando seu perfil...");
+
+  let { data: profile, error } = await supabase
+    .from("caldartt_profiles").select("nickname").eq("user_id", user.id).maybeSingle();
+  if (error) { setStatus("Não foi possível carregar o perfil. Tente novamente."); return; }
+
+  if (!profile) {
+    const nickname = user.user_metadata?.nickname || user.email?.split("@")[0] || "beleza";
+    const result = await supabase.from("caldartt_profiles")
+      .insert({ user_id: user.id, nickname }).select("nickname").single();
+    if (result.error) { setStatus("Não foi possível criar o perfil. Confira se o apelido está disponível."); return; }
+    profile = result.data;
+  }
+
+  document.getElementById("profile-nickname").textContent = profile.nickname;
+  setStatus("");
+  await loadFeedback(user);
+}
+
+async function loadFeedback(user) {
+  const list = document.getElementById("feedback-list");
+  list.replaceChildren();
+  const { data, error } = await supabase.from("caldartt_feedback")
+    .select("id,message,created_at").eq("user_id", user.id)
+    .order("created_at", { ascending:false }).limit(50);
+  if (error) { setStatus("Não foi possível carregar suas mensagens salvas."); return; }
+  if (!data.length) {
+    const empty = document.createElement("li");
+    empty.textContent = "Você ainda não enviou mensagens.";
+    list.append(empty);
+    return;
+  }
+  data.forEach(item => {
+    const row = document.createElement("li");
+    row.append(document.createTextNode(item.message));
+    const date = document.createElement("time");
+    date.dateTime = item.created_at;
+    date.textContent = new Date(item.created_at).toLocaleString("pt-BR");
+    row.append(date);
+    list.append(row);
+  });
+}
+
+document.getElementById("signup-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const nickname = String(form.get("nickname")).trim();
+  const email = String(form.get("email")).trim();
+  const password = String(form.get("password"));
+  setStatus("Criando sua conta...");
+  const { data, error } = await supabase.auth.signUp({
+    email, password,
+    options: {
+      data: { nickname },
+      emailRedirectTo: `${window.location.origin}${window.location.pathname}#contato`
+    }
+  });
+  if (error) { setStatus(error.message); return; }
+  if (data.session) await loadProfile(data.user);
+  else setStatus("Conta criada! Confira a confirmação da conta para entrar.");
+});
+
+document.getElementById("login-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  setStatus("Entrando...");
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email:String(form.get("email")).trim(), password:String(form.get("password"))
+  });
+  if (error) { setStatus("Não foi possível entrar. Confira o e-mail e a senha."); return; }
+  await loadProfile(data.user);
+});
+
+document.getElementById("feedback-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) { showAuth(); setStatus("Entre na sua conta para salvar uma mensagem."); return; }
+  const message = document.getElementById("feedback-message").value.trim();
+  if (message.length < 5) { setStatus("Escreva uma mensagem com pelo menos 5 caracteres."); return; }
+  setStatus("Salvando sua mensagem...");
+  const { error } = await supabase.from("caldartt_feedback").insert({ user_id:user.id, message });
+  if (error) { setStatus("Não foi possível salvar agora. Tente novamente."); return; }
+  document.getElementById("feedback-message").value = "";
+  setStatus("Mensagem salva no seu perfil.");
+  await loadFeedback(user);
+});
+
+document.getElementById("logout-button").addEventListener("click", async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) { setStatus("Não foi possível sair agora."); return; }
+  showAuth();
+  setAuthTab("login");
+  setStatus("Você saiu da conta.");
+});
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  window.setTimeout(() => {
+    if (session?.user) loadProfile(session.user);
+    else showAuth();
+  }, 0);
+});
+
+const { data: { session } } = await supabase.auth.getSession();
+if (session?.user) await loadProfile(session.user);
 </script>
 
 </body>
