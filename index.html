@@ -56,7 +56,7 @@
     }
     .btn-gold { background:var(--gold); color:#4a126e; }
     .btn-outline { color:white; border-color:white; background:transparent; }
-    .buttons button.btn { font-family:inherit; font-size:inherit; cursor:pointer; }
+    .buttons button.btn { appearance:none; font-family:inherit; font-size:inherit; cursor:pointer; }
     .btn:hover { transform:translateY(-2px); filter:brightness(1.05); }
     .feedback-dialog { width:min(92vw,520px); margin:auto; border:0; border-radius:22px; padding:30px; color:var(--text); box-shadow:0 20px 60px rgba(22,0,38,.35); }
     .feedback-dialog[open] { max-height:90vh; overflow:auto; }
@@ -404,7 +404,7 @@
       <div class="buttons">
         <a class="btn btn-gold" href="https://wa.me/5541991239210" target="_blank" rel="noopener">WhatsApp</a>
        <a class="btn btn-outline" href="https://www.instagram.com/caldartt._beauty/" target="_blank" rel="noopener">Instagram</a>
-        <button class="btn btn-outline" type="button" onclick="document.getElementById('feedback-dialog').showModal()">Sugestões e comentários</button>
+        <button class="btn btn-gold" type="button" onclick="document.getElementById('feedback-dialog').showModal()">Sugestões e comentários</button>
       </div>
     </div>
   </section>
