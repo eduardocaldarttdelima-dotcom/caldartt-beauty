@@ -68,6 +68,28 @@
       box-shadow:0 10px 30px rgba(85,20,130,.1);
       border:1px solid #efdff6; text-align:center;
     }
+    .new-arrivals { background:linear-gradient(180deg,#fff9ff,#f8efff); }
+    .new-products-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px;
+    }
+    .new-product-card {
+      display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+      min-height:220px; padding:22px; background:#fff; border:1px solid #ead9f5;
+      border-radius:20px; box-shadow:0 10px 28px rgba(85,20,130,.08);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .new-product-card:hover { transform:translateY(-4px); box-shadow:0 16px 34px rgba(85,20,130,.14); }
+    .new-product-badge {
+      display:inline-flex; align-items:center; gap:6px; padding:5px 10px;
+      border-radius:999px; background:#f7eaff; color:var(--purple-dark);
+      font-size:.75rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    }
+    .new-product-name { color:var(--text); font-size:1rem; line-height:1.45; font-weight:700; }
+    .new-product-price { margin-top:auto; color:var(--purple); font-size:1.35rem; font-weight:800; }
+    .new-product-price small { display:block; color:#70577c; font-size:.72rem; font-weight:600; }
+    .new-product-link { color:var(--purple-dark); font-size:.88rem; font-weight:700; text-decoration:none; }
+    .new-product-link:hover { color:#a323bd; text-decoration:underline; }
+    .new-products-note { margin:24px auto 0; max-width:680px; color:#70577c; text-align:center; font-size:.9rem; }
     .icon { font-size:2.5rem; margin-bottom:12px; }
     .card h3 { color:var(--purple); margin-bottom:8px; }
     .about {
@@ -94,6 +116,10 @@
     @media (max-width:760px) {
       nav ul { display:none; }
       .cards,.about-grid { grid-template-columns:1fr; }
+      .new-products-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+      .new-product-card { min-height:210px; padding:17px; }
+      .new-product-name { font-size:.94rem; }
+      .new-product-price { font-size:1.2rem; }
       .hero { min-height:85vh; }
       section { padding:58px 18px; }
     }
@@ -230,6 +256,7 @@
       .cards {
         grid-template-columns: repeat(2, 1fr);
       }
+      .new-products-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 
       nav {
         padding-left: 20px;
@@ -248,6 +275,7 @@
     <ul id="menu">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#novidades">Novidades</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
@@ -290,6 +318,35 @@
           <p>Produtos escolhidos para complementar sua rotina de beleza.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="new-arrivals" id="novidades">
+    <div class="container">
+      <div class="section-title">
+        <h2>✨ Novidades da Caldartt Beauty</h2>
+        <p>Acabaram de chegar! Confira os novos produtos da loja.</p>
+      </div>
+      <div class="new-products-grid">
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Lenço Higienizador Íntimo Mia Make C/12</h3><p class="new-product-price">R$ 6,50<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Len%C3%A7o%20Higienizador%20%C3%8Dntimo%20Mia%20Make%20C%2F12." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Lápis para olhos + sobrancelha (kit)</h3><p class="new-product-price">R$ 4,50<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20L%C3%A1pis%20para%20olhos%20%2B%20sobrancelha%20(kit)." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Glow Iluminador Belle Angel C/6</h3><p class="new-product-price">R$ 24,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Glow%20Iluminador%20Belle%20Angel%20C%2F6." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Loção Demaquilante Face Beautiful C/6</h3><p class="new-product-price">R$ 14,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Lo%C3%A7%C3%A3o%20Demaquilante%20Face%20Beautiful%20C%2F6." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Primer Facial Safira C/4</h3><p class="new-product-price">R$ 13,50<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Primer%20Facial%20Safira%20C%2F4." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Corretivo Líquido Lua e Neve C/12</h3><p class="new-product-price">R$ 13,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Corretivo%20L%C3%ADquido%20Lua%20e%20Neve%20C%2F12." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Tiara Nuvem Sabrina Sato C/6</h3><p class="new-product-price">R$ 27,30<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Tiara%20Nuvem%20Sabrina%20Sato%20C%2F6." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Gloss Vaquinha Country + chaveiro C/12</h3><p class="new-product-price">R$ 19,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Gloss%20Vaquinha%20Country%20%2B%20chaveiro%20C%2F12." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Gloss abelhinha</h3><p class="new-product-price">R$ 13,50<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Gloss%20abelhinha." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Máscara de cílios C/12</h3><p class="new-product-price">R$ 14,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20na%20M%C3%A1scara%20de%20c%C3%ADlios%20C%2F12." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Paletas de sombras</h3><p class="new-product-price">R$ 16,10<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20nas%20Paletas%20de%20sombras." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Paletas blush</h3><p class="new-product-price">R$ 26,50<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20nas%20Paletas%20blush." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Pó banana</h3><p class="new-product-price">R$ 14,00<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20P%C3%B3%20banana." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Pincel</h3><p class="new-product-price">R$ 14,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Pincel." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit higiene</h3><p class="new-product-price">R$ 16,90<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20higiene." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit esponjas</h3><p class="new-product-price">R$ 5,00<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20esponjas." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+        <article class="new-product-card"><span class="new-product-badge">Novidade</span><h3 class="new-product-name">Kit Lip Gloss Chocolate Lové Rain C/6</h3><p class="new-product-price">R$ 17,80<small>Venda unitária sugerida</small></p><a class="new-product-link" href="https://wa.me/5541991239210?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Lip%20Gloss%20Chocolate%20Lov%C3%A9%20Rain%20C%2F6." target="_blank" rel="noopener">Consultar no WhatsApp →</a></article>
+      </div>
+      <p class="new-products-note">Preços de venda unitária sugeridos conforme a planilha. Consulte a loja para confirmar disponibilidade.</p>
     </div>
   </section>
 
